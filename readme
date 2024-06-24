@@ -1,0 +1,170 @@
+### Projeto React com Firebase para Monitoramento de Dispositivos
+
+#### Índice
+
+1. [Descrição do Projeto](#descrição-do-projeto)
+2. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+3. [Requisitos do Sistema](#requisitos-do-sistema)
+4. [Configuração Inicial](#configuração-inicial)
+5. [Execução do Projeto](#execução-do-projeto)
+6. [Estrutura do Projeto](#estrutura-do-projeto)
+7. [Detalhes dos Dados](#detalhes-dos-dados)
+8. [Integração com Firebase](#integração-com-firebase)
+
+---
+
+## Descrição do Projeto
+
+Este projeto é uma aplicação React desenvolvida para monitorar e exibir o status de dispositivos em uma unidade neonatal. Utilizamos o Firebase como banco de dados para armazenar e buscar informações dos dispositivos em tempo real. O aplicativo apresenta um cartão de carregamento enquanto os dados são recuperados e exibe as informações de cada dispositivo em um layout estruturado.
+
+## Tecnologias Utilizadas
+
+- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **Firebase**: Plataforma para desenvolvimento de aplicativos móveis e web que fornece serviços como banco de dados em tempo real e autenticação.
+- **Tailwind CSS**: Framework de CSS utilitário para estilização rápida e eficiente.
+- **TypeScript**: Superset de JavaScript que adiciona tipagem estática opcional ao código.
+
+## Requisitos do Sistema
+
+- Node.js versão 14 ou superior
+- npm (Node Package Manager)
+- Conta no Firebase para configuração do banco de dados
+
+## Configuração Inicial
+
+1. **Clone o repositório**
+
+   ```bash
+   git clone https://github.com/seu-usuario/nome-do-projeto.git
+   cd nome-do-projeto
+   ```
+
+2. **Instale as dependências**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure o Firebase**
+
+   - Crie um projeto no Firebase.
+   - Habilite o Firestore Database.
+   - Copie as credenciais do projeto.
+
+   Crie um arquivo `firebaseConfig.js` na pasta `src` e adicione as credenciais do Firebase:
+
+   ```javascript
+   const firebaseConfig = {
+     apiKey: "sua-api-key",
+     authDomain: "seu-projeto.firebaseapp.com",
+     projectId: "seu-projeto",
+     storageBucket: "seu-projeto.appspot.com",
+     messagingSenderId: "seu-messaging-sender-id",
+     appId: "seu-app-id"
+   };
+
+   export default firebaseConfig;
+   ```
+
+4. **Configure o Firebase no Projeto**
+
+   - Crie o arquivo `firebase.js` na pasta `src` para inicializar o Firebase:
+
+   ```javascript
+   // src/firebase.js
+   import { initializeApp } from "firebase/app";
+   import { getFirestore } from "firebase/firestore";
+   import firebaseConfig from "./firebaseConfig";
+
+   const app = initializeApp(firebaseConfig);
+   const db = getFirestore(app);
+
+   export { db };
+   ```
+
+## Execução do Projeto
+
+Para executar o projeto em ambiente de desenvolvimento, utilize o seguinte comando:
+
+```bash
+npm run dev
+```
+
+O projeto estará disponível no navegador no endereço `http://localhost:3000`.
+
+## Estrutura do Projeto
+
+A estrutura do projeto está organizada da seguinte forma:
+
+```
+nome-do-projeto/
+├── public/                 # Arquivos públicos (HTML, favicon, etc)
+├── src/                    # Código fonte do projeto
+│   ├── components/         # Componentes React
+│   ├── firebase.js         # Inicialização do Firebase
+│   ├── firebaseConfig.js   # Configurações do Firebase
+│   ├── App.js              # Componente principal
+│   └── index.js            # Arquivo de entrada do React
+├── .gitignore              # Arquivos a serem ignorados pelo Git
+├── package.json            # Dependências do projeto e scripts
+└── README.md               # Documento de descrição do projeto
+```
+
+## Detalhes dos Dados
+
+Os dados armazenados no Firebase são referentes aos dispositivos monitorados e incluem as seguintes informações:
+
+- **IP**: Endereço IP do dispositivo.
+- **LEITO**: Identificação do leito onde o dispositivo está localizado.
+- **MAC**: Endereço MAC do dispositivo.
+- **SALA**: Nome da sala onde o dispositivo está.
+- **SSID**: Nome da rede Wi-Fi à qual o dispositivo está conectado.
+- **STATUS**: Status atual do leito (e.g., "LEITO_OCUPADO", "LEITO_LIVRE").
+
+Exemplo de estrutura de dados:
+
+```json
+{
+  "IP": "192.168.100.155",
+  "LEITO": "01",
+  "MAC": "84:CC:A8:2C:1B:94",
+  "SALA": "UTI_NEONATAL",
+  "SSID": "Oi casa 2.4G",
+  "STATUS": "LEITO_OCUPADO"
+}
+```
+
+## Integração com Firebase
+
+A integração com o Firebase é feita através do Firestore Database, onde os dados dos dispositivos são armazenados. Abaixo está um resumo das principais funções utilizadas:
+
+- **Conexão com Firestore**: Inicializa o Firebase e conecta ao Firestore.
+
+  ```javascript
+  import { initializeApp } from "firebase/app";
+  import { getFirestore } from "firebase/firestore";
+  import firebaseConfig from "./firebaseConfig";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  export { db };
+  ```
+
+- **Busca de Dados**: Utiliza o `getDocs` do Firestore para buscar os documentos da coleção "devices".
+
+  ```javascript
+  import { collection, getDocs } from "firebase/firestore";
+
+  const fetchData = async () => {
+    const querySnapshot = await getDocs(collection(db, "devices"));
+    const data = querySnapshot.docs.map((doc) => doc.data());
+    setData(data);
+    setLoading(false);
+  };
+  ```
+---
+
+**Desenvolvido com ❤️ pela equipe de HexaCore.** 
+
+Se você tiver qualquer dúvida ou sugestão, sinta-se à vontade para nos contatar!
