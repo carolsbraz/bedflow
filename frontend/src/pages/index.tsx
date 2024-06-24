@@ -1,21 +1,8 @@
-import { useEffect, useState } from "react";
-
-import { UserManagement } from "./admin/user-management";
+import { useState } from "react";
 
 import DashboardRounded from "@mui/icons-material/DashboardRounded";
-import EventRounded from "@mui/icons-material/EventRounded";
-import PeopleRounded from "@mui/icons-material/PeopleRounded";
-import LocalMallRounded from "@mui/icons-material/LocalMallRounded";
-import FilePresentRounded from "@mui/icons-material/FilePresentRounded";
-import {
-  BedRounded,
-  CalendarMonthRounded,
-  WorkspacesRounded,
-} from "@mui/icons-material";
-import { EnvironmentManagement } from "./admin/env-management.tsx";
-import { ScheduleManagement } from "./admin/sch-management.tsx";
-import { getCurrentUser } from "../services/users.service.ts";
-import { RequestManagement } from "./admin/request-management.tsx";
+import { BedRounded } from "@mui/icons-material";
+import { BedManagement } from "./admin/user-management.tsx";
 
 interface Component {
   title: string;
@@ -29,7 +16,7 @@ const components: Record<string, Component> = {
   },
   beds: {
     title: "Gerenciamento de leitos",
-    content: <UserManagement />,
+    content: <BedManagement />,
   },
 };
 

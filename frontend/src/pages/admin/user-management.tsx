@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -12,7 +12,7 @@ interface DeviceData {
   STATUS: string;
 }
 
-export function UserManagement() {
+export function BedManagement() {
   const [data, setData] = useState<DeviceData[]>([]);
   const [loading, setLoading] = useState(true);
 
