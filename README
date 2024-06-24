@@ -102,7 +102,7 @@ Para executar o projeto em ambiente de desenvolvimento, utilize o seguinte coman
 npm run dev
 ```
 
-O projeto estará disponível no navegador no endereço `http://localhost:3000`.
+O projeto estará disponível no navegador no endereço `http://localhost:5173/`.
 
 ## Estrutura do Projeto
 
@@ -119,7 +119,6 @@ bedflow/
 │   └── index.tsx           # Arquivo de entrada do React
 ├── .gitignore              # Arquivos a serem ignorados pelo Git
 ├── package.json            # Dependências do projeto e scripts
-└── README.md               # Documento de descrição do projeto
 ```
 
 ## Detalhes dos Dados
